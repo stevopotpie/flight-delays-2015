@@ -4,6 +4,11 @@
 ## Project Summary
 This project analyzes U.S. domestic airline delays and cancellations in 2015 using real-world flight data. The goal was to uncover operational patterns, identify bottlenecks, and highlight airports, routes, and time periods where delays and cancellations pose the greatest operational risk. These insights can inform scheduling decisions, resource allocation, and risk mitigation strategies for airline operations and airport planning.
 
+## Dataset
+The full 2015 flights dataset is too large for GitHub’s file-size limits and is not included in this repository.
+To reproduce the analysis, download the dataset locally and place it in `data/` as `flights.csv`.
+
+*Tip: A small sample dataset can be added later for quick previews and validation.*
 ### Key Insights
 
 ### Major Hub Comparison:
