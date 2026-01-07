@@ -8,7 +8,8 @@ This project analyzes U.S. domestic airline delays and cancellations in 2015 usi
 The full 2015 flights dataset is too large for GitHub’s file-size limits and is not included in this repository.
 To reproduce the analysis, download the dataset locally and place it in `data/` as `flights.csv`.
 
-*Tip: A small sample dataset can be added later for quick previews and validation.*
+*Note: A small sample dataset may be added in the future to support quick previews and validation.*
+
 ### Key Insights
 
 ### Major Hub Comparison:
