@@ -68,7 +68,6 @@ To reproduce the analysis, download the dataset locally and place it in `data/` 
 - Python (pandas, matplotlib) - data cleaning, aggregation, EDA
 - Jupyter Notebook - exploratory analysis and documentation
 - GitHub - version control and documentation
-- Power BI - planned interactive dashboard for stakeholder-facing insights
 
 ## Future Extensions
 - Add Power BI dashboard
