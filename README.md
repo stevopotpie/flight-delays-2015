@@ -1,77 +1,63 @@
-
 # Airline Delays and Cancellations (2015)
 
-## Project Summary
-This project analyzes U.S. domestic airline delays and cancellations in 2015 using real-world flight data. The goal was to uncover operational patterns, identify bottlenecks, and highlight airports, routes, and time periods where delays and cancellations pose the greatest operational risk. These insights can inform scheduling decisions, resource allocation, and risk mitigation strategies for airline operations and airport planning.
+Analysis of a full year of U.S. domestic flights to find where, when and why the system breaks down: which causes drive delay, how delay builds through the day, which airports and routes cancel most, and how the major hubs compare.
 
-## Dataset
-The full 2015 flights dataset is too large for GitHub’s file-size limits and is not included in this repository.
-To reproduce the analysis, download the dataset locally and place it in `data/` as `flights.csv`.
+**Tools:** Python (pandas, matplotlib), Jupyter Notebook, Git and GitHub
 
-*Note: A small sample dataset may be added in the future to support quick previews and validation.*
+## Key Findings
 
-### Key Insights
+- **Carrier delay is the largest source of delay minutes**, ahead of late arriving aircraft and NAS (air system) delay. The biggest share of lost time sits with factors airlines control directly.
+- **Delay compounds through the day.** Average departure delay climbs steadily from the morning and peaks between 4 PM and 8 PM, as early disruptions ripple into later departures.
+- **LaGuardia cancels far more than its neighbors.** LGA's cancellation rate was about 4.5%, against about 2% at JFK and about 3% at EWR, and most of the 15 most canceled routes touch LGA.
+- **Cancellations peak in winter**, with February the worst month.
+- **Hub performance varies widely.** Among major hubs, Seattle (SEA), Minneapolis (MSP) and Charlotte (CLT) performed best; Chicago O'Hare (ORD), Newark (EWR) and Miami (MIA) performed worst.
 
-### Major Hub Comparison:
-- To enable fair comparisons, major hubs were evaluated separately from low-volume airports.
+![Average departure delay by hour of day](visuals/avg_dep_delay_by_hour_of_day_bar.png)
 
-### Cancellations:
-- Top causes included carrier delays, weather, NAS (airspace constraints), security, and late-arriving aircraft.
-- Cancellations peaked during winter months—especially February—indicating the combined impact of weather and scheduling constraints.
-- LaGuardia (LGA) exhibited a significantly higher cancellation rate (~4.5%) compared to JFK (~2%) and EWR (~3%). Among the 15 most-canceled routes, the majority involved LGA as either the origin or destination.
-- Cancellation rates were evaluated alongside traffic volume to avoid misleading comparisons.
+![Average delay at major U.S. hubs](visuals/avg_delay_major_us_hub.png)
 
-### Delay Patterns:
-- Carrier-related delays were the largest contributor to total delay time, followed by late-arriving aircraft and NAS delays.
-- Delays accumulated throughout the day, peaking during late afternoon and early evening (4–8 PM), consistent with network ripple effects.
-- Airports with the highest average departure delays included Aspen (ASE), Eagle-Vail (EGE), Chicago O’Hare (ORD), and Trenton (TTN).
-- While some small regional airports showed low delays, low traffic volume limited the reliability of those comparisons. Subsequent analysis focused on major hubs for fairer benchmarking.
+![Cancellation rates at the three New York airports](visuals/nyc_airport_cancel_comparison.png)
 
-### Major Hub Comparison:
-- **To enable fair comparisons, major hubs were evaluated separately from low-volume airports.
-- **Best Performing Hubs:** Seattle (SEA), Minneapolis (MSP), Charlotte (CLT)
-- **Worst Performing Hubs:** Chicago O’Hare (ORD), Newark (EWR), Miami (MIA)
+## What This Means for Operations
 
-### Analytical Notes & Assumptions
-- Negative delay values (early departures) were excluded from delay calculations.
-- Airport and route comparisons were limited to locations with sufficient flight volume to reduce noise from rare events.
-- Extreme outliers were reviewed to prevent skewing average delay metrics.
+- **Protect the evening bank.** Because delay accumulates into the 4 PM to 8 PM window, schedule buffer and recovery resources do the most good there.
+- **Watch the controllable causes first.** With carrier delay leading, turn times, crew availability and maintenance readiness are the first metrics worth tracking.
+- **Plan winter protection for LGA.** LGA routes carry outsized cancellation risk, especially in winter, which argues for earlier proactive rebooking and spare capacity on those routes.
+- **Benchmark the hubs carefully.** The gap between SEA, MSP and CLT and the weaker hubs is worth studying, keeping in mind that weather and airspace congestion explain part of it.
 
-## Key Visuals
+## Methodology
 
-### Average Departure Delay by Hour of Day
-*Average departure delays increase steadily throughout the day, peaking in the late afternoon and evening as early disruptions cascade across the network.*
+- Excluded early departures (negative delay values) from average delay calculations so they would not mask real delays.
+- Separated low volume regional airports from major hubs. Small airports such as Aspen (ASE), Eagle-Vail (EGE) and Trenton (TTN) post extreme averages on very few flights, so hub comparisons use major airports only.
+- Reviewed extreme outliers before aggregating.
+- Grouped delays and cancellations by cause, hour of day, day of week, month, airport and route.
 
-![Average Departure Delay by Hour of Day](visuals/avg_dep_delay_by_hour_of_day_bar.png)
+## More Charts
 
----
+All charts are in [`/visuals`](visuals/), including:
 
-### Average Departure Delay by Major U.S. Hub
-*When controlling for flight volume, several major hubs consistently exhibit higher average departure delays, highlighting persistent operational challenges rather than isolated incidents.*
+- Cancellations by month and average arrival delay by month
+- Delay heatmap by day of week and month
+- Most delay prone, most canceled and most on time routes
+- Most canceled routes at major hubs
 
-![Average Departure Delay by Major U.S. Hub](visuals/avg_delay_major_us_hub.png)
+## Files
 
----
+- `Airline_Delay_Analysis.ipynb`: full analysis notebook
+- `data/`: place the dataset here (not stored in the repo, see below)
+- `visuals/`: exported charts
+- `README.md`: this documentation
 
-### Cancellation Rate by NYC Departure Airport
-*Despite serving the same metropolitan area, LaGuardia (LGA) shows a markedly higher cancellation rate than JFK and EWR, underscoring how airport-specific constraints affect reliability.*
+## How to Run
 
-![Cancellation Rate by NYC Departure Airport](visuals/nyc_airport_cancel_comparison.png)
-
-## Files Included
-- `Airline_Delay_Analysis.ipynb`: Jupyter Notebook with full analysis
-- `/data/`: Cleaned CSV file for analysis
-- `/visuals/`: PNG images used in the notebook and for documentation
-- `README.md`: This documentation
-
-## Tools Used
-- Python (pandas, matplotlib) - data cleaning, aggregation, EDA
-- Jupyter Notebook - exploratory analysis and documentation
-- GitHub - version control and documentation
+1. Clone this repository.
+2. Download the 2015 U.S. DOT flight delays dataset and place `flights.csv` in `data/`. The file is about 590 MB, over GitHub's file size limit, so it is not included here.
+3. Install the dependencies: `pip install pandas matplotlib jupyter`
+4. Open `Airline_Delay_Analysis.ipynb` in Jupyter and run all cells.
 
 ## Future Extensions
-- Add Power BI dashboard
+
+- Power BI dashboard for stakeholder facing reporting
 - Compare across multiple years
 - Explore aircraft types and delay correlation
 - Study route density and performance
-
