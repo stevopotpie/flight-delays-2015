@@ -6,3 +6,5 @@ __pycache__/
 data/flights.csv
 
 data/*.csv
+
+Not on Git/
